@@ -32,7 +32,7 @@ class WebImageDownloader {
   static Future<void> downloadImageFromUInt8List({
     required Uint8List uInt8List,
     String? name,
-    ImageType imageType = ImageType.gif,
+    ImageType imageType = ImageType.png,
   }) async {
     final blob = html.Blob([uInt8List], imageType.format);
 
