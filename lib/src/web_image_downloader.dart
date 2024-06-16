@@ -9,7 +9,6 @@ class WebImageDownloader {
   static Future<void> downloadImageFromWeb(
     String url, {
     Map<String, String>? headers,
-    double imageQuality = 0.95,
     String? name,
     ImageType imageType = ImageType.png,
   }) async {
@@ -21,7 +20,6 @@ class WebImageDownloader {
     if (res.statusCode == 200) {
       await downloadImageFromUInt8List(
         uInt8List: res.bodyBytes,
-        imageQuality: imageQuality,
         name: name,
         imageType: imageType,
       );
@@ -33,11 +31,10 @@ class WebImageDownloader {
   /// Download image from uInt8List to user device
   static Future<void> downloadImageFromUInt8List({
     required Uint8List uInt8List,
-    double imageQuality = 0.95,
     String? name,
-    ImageType imageType = ImageType.png,
+    ImageType imageType = ImageType.gif,
   }) async {
-    final blob = html.Blob([uInt8List]);
+    final blob = html.Blob([uInt8List], imageType.format);
 
     final blobUrl = html.Url.createObjectUrlFromBlob(blob);
 
